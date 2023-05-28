@@ -1,14 +1,16 @@
 <?php
 
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=artists;port=33061;charset=utf8', 'artistsuser', 'administrador123');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    include __DIR__ . '/../includes/DatabaseConnection.php';
+    include __DIR__ . '/../includes/DatabaseFunctions.php';
 
-    $sql = 'SELECT `idartist`, `artistname` FROM  `artist`';
+    $sql = 'SELECT `artist`.`idartist`, `artistname`,
+    `authorname`, `authoremail` FROM `artist` INNER JOIN
+    `author` ON `idauthor` = `author`.`id`';
     $artists = $pdo->query($sql);
 
     //foreach($result as $row){
-      //  $artists[] = $row['artistname'];
+    //  $artists[] = $row['artistname'];
     //}
 
     /*
@@ -25,6 +27,8 @@ try {
 
     $title = 'Artists List';
 
+    $totalArtist = totalArtist($pdo);
+
     // Start the buffer
     ob_start();
 
@@ -38,8 +42,8 @@ try {
     // in the $output variable for use in layout.html.php
     $output = ob_get_clean();
 } catch (PDOException $e) {
-    $output = 'Unable to connect to the database server:' . $e->getMessage() . ' in ' . 
-    $e->getFile() . ':' . $e->getLine();
+    $output = 'Unable to connect to the database server:' . $e->getMessage() . ' in ' .
+        $e->getFile() . ':' . $e->getLine();
 }
 
 include __DIR__ . '/../templates/layout.html.php';
