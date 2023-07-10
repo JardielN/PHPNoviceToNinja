@@ -4,16 +4,19 @@ try {
     include __DIR__ . '/../includes/DatabaseConnection.php';
     include __DIR__ . '/../includes/DatabaseFunctions.php';
 
-    $sql = 'SELECT `artist`.`idartist`, `artistname`,
-    `authorname`, `authoremail` FROM `artist` INNER JOIN
-    `author` ON `idauthor` = `author`.`id`';
-    $artists = $pdo->query($sql);
+    $artists = allArtists($pdo);
 
     //foreach($result as $row){
     //  $artists[] = $row['artistname'];
     //}
 
     /*
+    $sql = 'SELECT `artist`.`idartist`, `artistname`,
+    `authorname`, `authoremail` FROM `artist` INNER JOIN
+    `author` ON `idauthor` = `author`.`id`';
+    $artists = $pdo->query($sql);
+
+    
     while($row = $result->fetch()){
         $artists[] = ['idartist' => $row['idartist'], 'artistname' => $row['artistname']];
     }

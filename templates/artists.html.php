@@ -24,6 +24,8 @@
                     <?php 
                     echo htmlspecialchars($artist['authorname'], ENT_QUOTES, 'UTF-8'); ?></a>)
 
+                    <a href="editartist.php?idartist=<?=$artist['idartist']?>">Edit</a>
+
                     <form action="deleteartist.php" method="POST">
                         <input type="hidden" name="idartist" value="<?=$artist['idartist']?>">
                         <input type="submit" value="Delete">

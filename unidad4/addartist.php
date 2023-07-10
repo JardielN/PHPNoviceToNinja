@@ -3,7 +3,9 @@
 if(isset($_POST['artistname']) and isset($_POST['artistborn'])){
     try {
     include __DIR__ . '/../includes/DatabaseConnection.php';
+    include __DIR__ . '/../includes/DatabaseFunctions.php';
 
+    /*
     $sql = 'INSERT INTO `artist` SET
     `artistname` = :artistname,
     `artistborn` = :artistborn,
@@ -15,6 +17,9 @@ if(isset($_POST['artistname']) and isset($_POST['artistborn'])){
     $stmt->bindValue('artistborn', $_POST['artistborn']);
 
     $stmt->execute();
+    */
+
+    insertArtist($pdo, $_POST['artistname'], $_POST['artistborn'], 2);
 
     header('location: artists.php');
 
